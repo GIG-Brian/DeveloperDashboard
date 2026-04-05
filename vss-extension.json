@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "deployment-dashboard",
   "name": "Deployment Dashboard",
-  "version": "1.0.0",
+  "version": "1.0.14",
   "publisher": "YOUR-PUBLISHER-ID",
   "description": "Shows the latest deployed pipeline run per environment across all pipelines.",
   "categories": ["Azure Pipelines"],
