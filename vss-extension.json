@@ -1,0 +1,32 @@
+{
+  "manifestVersion": 1,
+  "id": "deployment-dashboard",
+  "name": "Deployment Dashboard",
+  "version": "1.0.0",
+  "publisher": "YOUR-PUBLISHER-ID",
+  "description": "Shows the latest deployed pipeline run per environment across all pipelines.",
+  "categories": ["Azure Pipelines"],
+  "targets": [{ "id": "Microsoft.VisualStudio.Services" }],
+  "icons": { "default": "img/icon.png" },
+
+  "baseUri": "https://YOUR-GITHUB-ORG.github.io/YOUR-REPO-NAME",
+
+  "contributions": [
+    {
+      "id": "deployment-dashboard-hub",
+      "type": "ms.vss-web.hub",
+      "targets": ["ms.vss-build-web.build-release-hub-group"],
+      "properties": {
+        "name": "Deployment Dashboard",
+        "order": 99,
+        "uri": "dashboard.html"
+      }
+    }
+  ],
+
+  "files": [
+    { "path": "img", "addressable": true }
+  ],
+
+  "scopes": ["vso.build"]
+}

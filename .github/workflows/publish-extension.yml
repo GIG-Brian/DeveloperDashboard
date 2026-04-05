@@ -1,0 +1,47 @@
+name: Publish Extension
+
+on:
+  # Run manually from the Actions tab, or on a version tag
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install tfx-cli
+        run: npm install -g tfx-cli
+
+      - name: Install dependencies
+        run: npm install
+
+      # The .vsix only needs the manifest + icon.
+      # Static files (HTML/JS/CSS) are served from GitHub Pages via baseUri.
+      - name: Package extension
+        run: tfx extension create --manifest-globs vss-extension.json
+
+      - name: Upload .vsix artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vsix
+          path: '*.vsix'
+
+      # Optional: auto-publish to the Marketplace.
+      # Set MARKETPLACE_TOKEN in repo Settings → Secrets → Actions.
+      # Remove or comment out this step if you prefer to upload manually.
+      - name: Publish to Marketplace
+        if: ${{ secrets.MARKETPLACE_TOKEN != '' }}
+        run: |
+          tfx extension publish \
+            --manifest-globs vss-extension.json \
+            --token ${{ secrets.MARKETPLACE_TOKEN }}

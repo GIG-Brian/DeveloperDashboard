@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deployment Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="toolbar">
+    <h1 class="toolbar-title">Deployment dashboard</h1>
+    <div class="toolbar-actions">
+      <span class="last-refreshed" id="last-refreshed"></span>
+      <button class="btn" id="refresh-btn" onclick="window.__loadDashboard()">Refresh</button>
+    </div>
+  </div>
+  <div class="content">
+    <div id="error-area"></div>
+    <div id="dashboard-content">
+      <div class="empty-state"><span class="spinner"></span> Initialising&hellip;</div>
+    </div>
+  </div>
+  <script src="dist/dashboard.js"></script>
+</body>
+</html>
